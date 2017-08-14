@@ -63,14 +63,14 @@ indicators:
             indicator_factory.add(indicator_config)
 
         indicator = indicator_factory.indicator('chem.cfam.cei.condition.1..action.levels..monthly', .45)
-        self.assertIn(indicator.name,indicator_factory.indicatorDictionary.keys())
+        self.assertIn(indicator.name,indicator_factory.indicator_dictionary.keys())
         self.assertIsInstance(indicator, IndicatorBase)
         self.assertIsInstance(indicator, NumberIndicator)
         self.assertEquals(indicator.is_normal(.45),True)
         self.assertFalse(indicator.is_normal(.427))
 
         indicator = indicator_factory.indicator('chem.cfam.aux.system.chemistry.index', 'green')
-        self.assertIn(indicator.name, indicator_factory.indicatorDictionary.keys())
+        self.assertIn(indicator.name, indicator_factory.indicator_dictionary.keys())
         self.assertIsInstance(indicator, IndicatorBase)
         self.assertIsInstance(indicator, CodedIndicator)
         self.assertTrue(indicator.in_range('green'))

@@ -47,12 +47,11 @@ class IndicatorBase:
     def __hash__(self):
         """ hash on name"""
         return hash(self.name)
-        pass
 
     def __eq__(self, other):
         """ eq when name is equal, sort in alphabetical order"""
         return self.name == other.name
-        pass
+
 
 
 class CodedIndicator(IndicatorBase):
@@ -110,8 +109,8 @@ class CodedIndicator(IndicatorBase):
 
 
 
-    def _repr_(self):
-        pass
+    def __repr__(self):
+        return "<{0}:name={1}, display_name={2},source={3}, description={4}, range={5},map={6}>".format(self.__class__.__name__,self.name, self.display_name, self.source, self.description,self.range,self.map)
 
 
 class NumberIndicator(IndicatorBase):
@@ -152,15 +151,14 @@ class NumberIndicator(IndicatorBase):
             return True
         else:
             return False
-        pass
 
     def is_normal(self,value):
         """
         indicator value inside statistical variance
         :return bool:
         """
-        if (float(self.range['mean'])-float(self.range['std'])) <= value and \
-                        value <= (float(self.range['mean'])+float(self.range['std'])):
+        if (float(self.range['mean'])-float(self.range['std'])) <= value \
+                <= (float(self.range['mean'])+float(self.range['std'])):
             return True
         else:
             return False
@@ -170,7 +168,7 @@ class NumberIndicator(IndicatorBase):
                % (self.name, self.display_name, self.source, self.description, self.range, self.map)
 
     def __repr__(self):
-        return self.__str__()
+        return "<{0}:name={1}, display_name={2},source={3}, description={4}, range={5},map={6}>".format(self.__class__.__name__,self.name, self.display_name, self.source, self.description,self.range,self.map)
 
 
 class IndicatorFactory:
@@ -181,7 +179,7 @@ class IndicatorFactory:
     """
     def __init__(self):
         """ Establish a factory to produce CodeIndicator and NumberIndicator objects """
-        self.indicatorDictionary = {}
+        self.indicator_dictionary = {}
 
     def add(self, indicator_config):
         """
@@ -203,10 +201,10 @@ class IndicatorFactory:
         try:
             if isinstance(indicator_config['range'],list):
                 cI = CodedIndicator(indicator_config)
-                self.indicatorDictionary[cI.name] = cI
+                self.indicator_dictionary[cI.name] = cI
             elif isinstance(indicator_config['range'],dict):
                 numInd = NumberIndicator(indicator_config)
-                self.indicatorDictionary[numInd.name] = numInd
+                self.indicator_dictionary[numInd.name] = numInd
             else:
                 raise Exception("IndicatorConfigError")
         except:
@@ -218,5 +216,5 @@ class IndicatorFactory:
     def indicator(self, indicator_name, indicator_value):
         """ Fabricate a concrete indicator from an indicator spec """
         if indicator_name and indicator_value:
-            if indicator_name in self.indicatorDictionary.keys():
-                return self.indicatorDictionary[indicator_name]
+            if indicator_name in self.indicator_dictionary.keys():
+                return self.indicator_dictionary[indicator_name]
