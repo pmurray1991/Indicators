@@ -39,6 +39,9 @@ indicators:
       mean: .452
       std: .024
       precision : '{:.1%}'
+      upper_quartile: '1100'
+      lower_quartile: '500'
+      median: '800'
     map:
       - null: None
       - NA: None

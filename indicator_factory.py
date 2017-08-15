@@ -157,8 +157,11 @@ class NumberIndicator(IndicatorBase):
         indicator value inside statistical variance
         :return bool:
         """
-        if (float(self.range['mean'])-float(self.range['std'])) <= value \
-                <= (float(self.range['mean'])+float(self.range['std'])):
+        # if (float(self.range['mean'])-float(self.range['std'])) <= value \
+        #         <= (float(self.range['mean'])+float(self.range['std'])):
+        q1 = self.range['upper_quartile']
+        q3 = self.range['lower_quartile']
+        if q1 <= value <= q3:
             return True
         else:
             return False
