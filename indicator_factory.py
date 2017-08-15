@@ -159,9 +159,9 @@ class NumberIndicator(IndicatorBase):
         """
         # if (float(self.range['mean'])-float(self.range['std'])) <= value \
         #         <= (float(self.range['mean'])+float(self.range['std'])):
-        q1 = self.range['upper_quartile']
-        q3 = self.range['lower_quartile']
-        if q1 <= value <= q3:
+        q3 = float(self.range['upper_quartile'])
+        q1 = float(self.range['lower_quartile'])
+        if q1 <= float(value) <= q3:
             return True
         else:
             return False

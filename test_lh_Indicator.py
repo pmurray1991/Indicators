@@ -69,8 +69,8 @@ indicators:
         self.assertIn(indicator.name,indicator_factory.indicator_dictionary.keys())
         self.assertIsInstance(indicator, IndicatorBase)
         self.assertIsInstance(indicator, NumberIndicator)
-        self.assertEquals(indicator.is_normal(.45),True)
-        self.assertFalse(indicator.is_normal(.427))
+        self.assertEquals(indicator.is_normal(500),True)
+        self.assertFalse(indicator.is_normal(499))
 
         indicator = indicator_factory.indicator('chem.cfam.aux.system.chemistry.index', 'green')
         self.assertIn(indicator.name, indicator_factory.indicator_dictionary.keys())
